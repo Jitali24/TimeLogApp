@@ -1,0 +1,58 @@
+/* stylesheet */
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.top {
+    text-align: center;
+}
+
+button {
+    background-color: white;
+    border-radius: 5px;
+    border-color: grey;
+    border-width: 500;
+    padding: 1px 10px;
+}
+
+.table2 table {
+    width: 100%;
+}
+
+.table2 table,
+.table2 tr,
+.table2 td {
+    border: 1px solid rgb(145, 144, 144);
+    border-collapse: collapse;
+    text-align: center;
+    /* padding: 1px 5px; */
+}
+
+td {
+    width: 70px;
+}
+
+#task-description {
+    width: 850px;
+    width: 62%;
+}
+
+.table-tab {
+    margin: 0px 10px;
+}
+
+.table-tab input,
+.table-tab button {
+    margin: 0px 5px;
+}
+
+.table-tab button {
+    width: 6%;
+}
+
+input::placeholder {
+    color: black;
+    padding-left: 10px;
+}

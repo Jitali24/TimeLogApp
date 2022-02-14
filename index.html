@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>TimeLog</title>
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <!-- style -->
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <br />
+            <div class="top">
+                Select Date: <input type="text" />
+                blank
+                <button>Load</button>
+                <button>Export Timesheet as PNG</button>
+            </div>
+            <div>
+                <hr />
+            </div>
+            <div class="table-tab">
+                <input type="text" placeholder="Start Time" id="start-time" />
+
+                <input type="text" placeholder="End Time" id="end-time" />
+
+                <input
+                    type="text"
+                    placeholder="Task Description"
+                    id="task-description"
+                />
+                <button>Add</button>
+            </div>
+            <div>
+                <hr />
+            </div>
+            <div class="table2">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Start Time</td>
+                            <td>End Time</td>
+                            <td>Minutes</td>
+                            <td>Task Description</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div>
+                <br />
+                Day Total in Minutes Day Total in Hours
+            </div>
+            <div>
+                <hr />
+            </div>
+        </div>
+
+        <!-- script -->
+        <script src="./script.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
