@@ -17,21 +17,25 @@ button {
     padding: 1px 10px;
 }
 
-.table2 table {
+table {
     width: 100%;
 }
 
-.table2 table,
-.table2 tr,
-.table2 td {
+table,
+tr,
+td {
     border: 1px solid rgb(145, 144, 144);
     border-collapse: collapse;
     text-align: center;
-    /* padding: 1px 5px; */
+    height: 40px;
 }
 
-td {
+.table2 td {
     width: 70px;
+}
+
+.table2 tr #task {
+    width: 50%;
 }
 
 #task-description {
@@ -55,4 +59,30 @@ td {
 input::placeholder {
     color: black;
     padding-left: 10px;
+}
+
+#top {
+    color: #111;
+    background: #b90a0a;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+hr {
+    height: 0px;
+    border: none;
+    border-top: 2px solid rgb(109, 108, 108);
+}
+
+img {
+    margin-left: -10px;
+    height: 45px;
+    width: 45px;
+}
+
+.btn1 {
+    padding: 1px 10px;
+    height: max-content;
 }

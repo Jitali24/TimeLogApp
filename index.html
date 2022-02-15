@@ -8,6 +8,7 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <title>TimeLog</title>
+
         <!-- Bootstrap CSS -->
         <link
             rel="stylesheet"
@@ -15,44 +16,66 @@
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous"
         />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
+
+        <!-- faltpickr -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+        />
+
         <!-- style -->
         <link rel="stylesheet" href="./style.css" />
     </head>
-    <body>
+    <body id="demo">
         <div class="container-fluid">
             <br />
             <div class="top">
-                Select Date: <input type="text" />
-                blank
-                <button>Load</button>
-                <button>Export Timesheet as PNG</button>
+                Select Date:
+                <input type="selectdate" />
+                <img src="./images/calendar.png" alt="" id="imgID" />
+                <button onclick="load();">Load</button>
+                <button onclick="downloadtable();">
+                    Export Timesheet as PNG
+                </button>
             </div>
             <div>
                 <hr />
             </div>
             <div class="table-tab">
-                <input type="text" placeholder="Start Time" id="start-time" />
-
-                <input type="text" placeholder="End Time" id="end-time" />
-
+                <input
+                    type="text"
+                    placeholder="Start Time"
+                    id="start-time"
+                    class="time-pickable"
+                    readonly
+                />
+                <input
+                    type="text"
+                    placeholder="End Time"
+                    id="end-time"
+                    class="time-pickable"
+                    readonly
+                />
                 <input
                     type="text"
                     placeholder="Task Description"
                     id="task-description"
+                    value=" Example of time-log app"
                 />
-                <button>Add</button>
+                <button onclick="add();">Add</button>
             </div>
             <div>
                 <hr />
             </div>
             <div class="table2">
-                <table>
+                <table id="table2">
                     <thead>
                         <tr>
-                            <td>Start Time</td>
-                            <td>End Time</td>
-                            <td>Minutes</td>
-                            <td>Task Description</td>
+                            <td style="font-weight: 500">Start Time</td>
+                            <td style="font-weight: 500">End Time</td>
+                            <td style="font-weight: 500">Minutes</td>
+                            <td id="task" style="font-weight: 500">Task Description</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -70,6 +93,7 @@
 
         <!-- script -->
         <script src="./script.js"></script>
+
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -85,5 +109,40 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
+
+        <!-- flatpickr -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+        <script>
+            flatpickr('input[type="selectdate"]', {})
+            // flatpickr('#imgID', {})
+        </script>
+
+        <script>
+            function downloadtable() {
+                var node = document.getElementById('demo')
+
+                domtoimage
+                    .toPng(node)
+                    .then(function (dataUrl) {
+                        var img = new Image()
+                        img.src = dataUrl
+                        downloadURI(dataUrl, 'records.png')
+                    })
+                    .catch(function (error) {
+                        console.error('oops, something went wrong', error)
+                    })
+            }
+            function downloadURI(uri, name) {
+                var link = document.createElement('a')
+                link.download = name
+                link.href = uri
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+                delete link
+            }
+        </script>
+        <script src="time.js"></script>
     </body>
 </html>
