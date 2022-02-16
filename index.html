@@ -8,7 +8,6 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <title>TimeLog</title>
-
         <!-- Bootstrap CSS -->
         <link
             rel="stylesheet"
@@ -17,17 +16,15 @@
             crossorigin="anonymous"
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
-
         <!-- faltpickr -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
         />
-
         <!-- style -->
         <link rel="stylesheet" href="./style.css" />
     </head>
-    <body id="demo">
+    <body>
         <div class="container-fluid">
             <br />
             <div class="top">
@@ -68,32 +65,45 @@
             <div>
                 <hr />
             </div>
-            <div class="table2">
+            <div class="table2" id="demo">
                 <table id="table2">
                     <thead>
                         <tr>
                             <td style="font-weight: 500">Start Time</td>
                             <td style="font-weight: 500">End Time</td>
                             <td style="font-weight: 500">Minutes</td>
-                            <td id="task" style="font-weight: 500">Task Description</td>
+                            <td id="task" style="font-weight: 500">
+                                Task Description
+                            </td>
                             <td></td>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
-            <div>
-                <br />
-                Day Total in Minutes Day Total in Hours
+            <br />
+            <div class="bottom">
+                <div class="one">
+                    Day Total in Minutes <br />
+                    <span id="minutes"></span>
+                </div>
+                <div class="two">
+                    Day Total in Hours
+                    <br />
+                    <span id="hours"></span>
+                </div>
             </div>
             <div>
                 <hr />
             </div>
         </div>
-
-        <!-- script -->
-        <script src="./script.js"></script>
-
+        <!-- scripts -->
+        <!-- flatpickr -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            flatpickr('input[type="selectdate"]', {})
+        </script>
+        <!-- bootstrap -->
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -109,40 +119,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
-
-        <!-- flatpickr -->
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-        <script>
-            flatpickr('input[type="selectdate"]', {})
-            // flatpickr('#imgID', {})
-        </script>
-
-        <script>
-            function downloadtable() {
-                var node = document.getElementById('demo')
-
-                domtoimage
-                    .toPng(node)
-                    .then(function (dataUrl) {
-                        var img = new Image()
-                        img.src = dataUrl
-                        downloadURI(dataUrl, 'records.png')
-                    })
-                    .catch(function (error) {
-                        console.error('oops, something went wrong', error)
-                    })
-            }
-            function downloadURI(uri, name) {
-                var link = document.createElement('a')
-                link.download = name
-                link.href = uri
-                document.body.appendChild(link)
-                link.click()
-                document.body.removeChild(link)
-                delete link
-            }
-        </script>
+        <script src="./script.js"></script>
         <script src="time.js"></script>
     </body>
 </html>

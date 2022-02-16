@@ -18,6 +18,8 @@ button {
 }
 
 table {
+    background-color: white;
+    color: black;
     width: 100%;
 }
 
@@ -41,6 +43,11 @@ td {
 #task-description {
     width: 850px;
     width: 62%;
+    padding-left: 10px;
+}
+
+#task-description::placeholder {
+    padding-left: 0px;
 }
 
 .table-tab {
@@ -85,4 +92,36 @@ img {
 .btn1 {
     padding: 1px 10px;
     height: max-content;
+}
+
+.bottom {
+    display: flex;
+}
+
+.two {
+    margin-left: 50px;
+}
+
+.time-picker {
+    width: 185px;
+    position: absolute;
+    display: inline-block;
+    background: #e0dfd9;
+    border-radius: 0px;
+    border: 1px solid black;
+    padding: 2px 33px;
+}
+
+.time-picker__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1px 5px;
+    background: #ffffff;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
 }
