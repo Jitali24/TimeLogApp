@@ -29,7 +29,7 @@
             <br />
             <div class="top">
                 Select Date:
-                <input type="selectdate" />
+                <input type="selectdate" id="date" />
                 <img src="./images/calendar.png" alt="" id="imgID" />
                 <button onclick="load();">Load</button>
                 <button onclick="downloadtable();">
@@ -58,9 +58,8 @@
                     type="text"
                     placeholder="Task Description"
                     id="task-description"
-                    value=" Example of time-log app"
                 />
-                <button  id="add" onclick="add();">Add</button>
+                <button id="add" onclick="add();">Add</button>
             </div>
             <div>
                 <hr />
@@ -85,6 +84,7 @@
             <div class="bottom">
                 <div class="one">
                     Day Total in Minutes <br />
+                    <span id="day"></span>
                     <span id="minutes"></span>
                 </div>
                 <div class="two">
@@ -102,6 +102,7 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
             flatpickr('input[type="selectdate"]', {})
+            // flatpickr('img', {})
         </script>
         <!-- bootstrap -->
         <script
@@ -119,6 +120,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
+        <!-- scripts -->
         <script src="./script.js"></script>
         <script src="time.js"></script>
     </body>

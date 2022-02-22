@@ -40,9 +40,24 @@ td {
     width: 50%;
 }
 
+#start-time {
+    padding-left: 10px;
+}
+
+#start-time::placeholder {
+    padding-left: 0px;
+}
+
+#end-time {
+    padding-left: 10px;
+}
+
+#end-time::placeholder {
+    padding-left: 0px;
+}
+
 #task-description {
-    width: 850px;
-    width: 62%;
+    width: 63%;
     padding-left: 10px;
 }
 
@@ -57,10 +72,6 @@ td {
 .table-tab input,
 .table-tab button {
     margin: 0px 5px;
-}
-
-.table-tab button {
-    width: 6%;
 }
 
 input::placeholder {

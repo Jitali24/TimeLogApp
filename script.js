@@ -1,5 +1,4 @@
 // script for timelog
-
 function downloadtable() {
     var node = document.getElementById('demo')
     domtoimage
@@ -23,12 +22,14 @@ function downloadURI(uri, name) {
     delete link
 }
 
+var date = document.getElementById('date')
 var startTime = document.getElementById('start-time')
 var endTime = document.getElementById('end-time')
 var taskDescription = document.getElementById('task-description')
 var table = document.getElementById('table2')
 var selectedrow = null
 var flag = false
+var rowIndex = 0
 
 display()
 
@@ -37,18 +38,20 @@ function addRecord() {
     if (flag === -1) {
         return
     }
-    let entries = new Array()
-    entries = JSON.parse(localStorage.getItem('record'))
+    let records = new Array()
+    records = JSON.parse(localStorage.getItem('record'))
         ? JSON.parse(localStorage.getItem('record'))
         : []
-    entries.push({
+    records.push({
         Id: indexOf(),
         Start_Time: document.getElementById('start-time').value,
         End_Time: document.getElementById('end-time').value,
         Minutes: flag,
         Task_Description: document.getElementById('task-description').value,
     })
-    localStorage.setItem('record', JSON.stringify(entries))
+    localStorage.setItem('record', JSON.stringify(records))
+
+    //insert without local storage
     // let newRow = table.insertRow(table.rows.length)
     // let cell1 = newRow.insertCell(0)
     // let cell2 = newRow.insertCell(1)
@@ -68,7 +71,7 @@ function addRecord() {
 function indexOf() {
     var table = document.getElementById('table2')
     var tl = table.rows.length
-    return tl
+    return tl - 1
 }
 
 function clear() {
@@ -78,8 +81,25 @@ function clear() {
 }
 
 function delete_record(r) {
-    let i = r.parentNode.parentNode.rowIndex
-    document.getElementById('table2').deleteRow(i)
+    // delete without local storage
+    // let i = r.parentNode.parentNode.rowIndex
+    // document.getElementById('table2').deleteRow(i)
+    if (confirm('Are you sure you want to delete this record ?')) {
+        entries = JSON.parse(localStorage.getItem('record'))
+        selectedrow = r.parentElement.parentElement
+        rowIndex = selectedrow.cells[5].innerHTML
+        for (let i = 0; i < entries.length; i++) {
+            if (entries[i].Id == rowIndex) {
+                entries.splice(i, 1)
+                location.reload()
+                break
+            }
+        }
+        for (let i = rowIndex; i < entries.length; i++) {
+            entries[i].Id = entries[i].Id - 1
+        }
+        localStorage.setItem('record', JSON.stringify(entries))
+    }
 }
 
 function calculate() {
@@ -94,7 +114,9 @@ function calculate() {
     if (difference > 0 || difference == 0) {
         return Math.round(difference / 60000) + ' minutes'
     } else {
-        alert('Enter appropriate Start Time and End Time.')
+        alert(
+            'Enter appropriate Start Time and End Time. \n\nNote: \nEnd Time cannot be less than Start Time!'
+        )
         return -1
     }
 }
@@ -105,6 +127,7 @@ function edit(r) {
     document.getElementById('end-time').value = selectedrow.cells[1].innerHTML
     document.getElementById('task-description').value =
         selectedrow.cells[3].innerHTML
+    rowIndex = selectedrow.cells[5].innerHTML
 }
 
 function update() {
@@ -112,11 +135,17 @@ function update() {
     if (flag === -1) {
         return
     }
-    selectedrow.cells[0].innerHTML = document.getElementById('start-time').value
-    selectedrow.cells[1].innerHTML = document.getElementById('end-time').value
-    selectedrow.cells[2].innerHTML = flag
-    selectedrow.cells[3].innerHTML =
-        document.getElementById('task-description').value
+    records = JSON.parse(localStorage.getItem('record'))
+    for (let i = 1; i < records.length; i++) {
+        if (records[i].Id == rowIndex) {
+            records[i].Start_Time = document.getElementById('start-time').value
+            records[i].End_Time = document.getElementById('end-time').value
+            records[i].Minutes = flag
+            records[i].Task_Description =
+                document.getElementById('task-description').value
+        }
+    }
+    localStorage.setItem('record', JSON.stringify(records))
 }
 
 function add() {
@@ -126,10 +155,11 @@ function add() {
         } else {
             update()
         }
+
+        clear()
+        totalHM()
+        location.reload()
     }
-    clear()
-    totalHM()
-    location.reload()
 }
 
 function load() {
@@ -169,21 +199,10 @@ function totalHM() {
     document.getElementById('hours').innerHTML = hour
 }
 
-//local storage
-
-// let addbtn = document.getElementById('add')
-
-// addbtn.addEventListener('click', function () {
-//     stval = startTime.value
-//     let record = localStorage.getItem('localdata')
-//     if (localdata == null) {
-//         new_record = []
-//     } else {
-//         new_record = JSON.parse(record)
-//     }
-//     new_record.push(stval)
-//     localStorage.setItem('localdata', JSON.stringify(new_record))
-// })
+// function day() {
+//     var x = document.getElementById('date').value
+//     document.getElementById('day').innerHTML = x
+// }
 
 function display() {
     var table = document
@@ -207,9 +226,12 @@ function display() {
         cell4 = newRow.insertCell(3)
         cell4.innerHTML = entries[index].Task_Description
         cell5 = newRow.insertCell(4)
-        // cell5.innerHTML = <a onclick='onEdit(this)'>Edit</a> & nbsp
-        // ;<a onClick='onDelete(this)'>Delete</a>
         cell5.innerHTML =
             '<button  class="btn1" onclick="edit(this);">Edit</button> <button class="btn1" onclick="delete_record(this);">Delete</button>'
+        cell6 = newRow.insertCell(5)
+        cell6.innerHTML = index
+        cell6.style.display = 'none'
     })
+    totalHM()
+    // day()
 }
