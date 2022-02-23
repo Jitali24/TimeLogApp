@@ -3,6 +3,7 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+    font-family: 'Lato', sans-serif;
 }
 
 .top {
@@ -15,6 +16,10 @@ button {
     border-color: grey;
     border-width: 500;
     padding: 1px 10px;
+}
+
+#date {
+    border-color: grey;
 }
 
 table {
@@ -57,7 +62,7 @@ td {
 }
 
 #task-description {
-    width: 63%;
+    width: 64%;
     padding-left: 10px;
 }
 
@@ -72,6 +77,7 @@ td {
 .table-tab input,
 .table-tab button {
     margin: 0px 5px;
+    height: 30px;
 }
 
 input::placeholder {
@@ -92,6 +98,10 @@ hr {
     height: 0px;
     border: none;
     border-top: 2px solid rgb(109, 108, 108);
+}
+
+#col-heading {
+    font-weight: 550;
 }
 
 img {

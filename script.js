@@ -50,7 +50,7 @@ function addRecord() {
         Task_Description: document.getElementById('task-description').value,
     })
     localStorage.setItem('record', JSON.stringify(records))
-
+    location.reload()
     //insert without local storage
     // let newRow = table.insertRow(table.rows.length)
     // let cell1 = newRow.insertCell(0)
@@ -71,7 +71,7 @@ function addRecord() {
 function indexOf() {
     var table = document.getElementById('table2')
     var tl = table.rows.length
-    return tl - 1
+    return tl - 2
 }
 
 function clear() {
@@ -136,7 +136,7 @@ function update() {
         return
     }
     records = JSON.parse(localStorage.getItem('record'))
-    for (let i = 1; i < records.length; i++) {
+    for (let i = 0; i < records.length; i++) {
         if (records[i].Id == rowIndex) {
             records[i].Start_Time = document.getElementById('start-time').value
             records[i].End_Time = document.getElementById('end-time').value
@@ -154,11 +154,10 @@ function add() {
             addRecord()
         } else {
             update()
+            location.reload()
         }
-
         clear()
         totalHM()
-        location.reload()
     }
 }
 
@@ -188,9 +187,9 @@ function validate() {
 function totalHM() {
     var table = document.getElementById('table2'),
         min = 0,
-        hour
+        hour = 0
 
-    for (var i = 1; i < table.rows.length; i++) {
+    for (var i = 2; i < table.rows.length; i++) {
         min = min + parseInt(table.rows[i].cells[2].innerHTML)
     }
 
@@ -198,11 +197,6 @@ function totalHM() {
     document.getElementById('minutes').innerHTML = min
     document.getElementById('hours').innerHTML = hour
 }
-
-// function day() {
-//     var x = document.getElementById('date').value
-//     document.getElementById('day').innerHTML = x
-// }
 
 function display() {
     var table = document
@@ -215,6 +209,7 @@ function display() {
         entries = JSON.parse(allEntries)
     }
     entries.forEach((item, index) => {
+        document.getElementById('null-records').style.display = 'none'
         var newRow = table.insertRow(table.length)
 
         cell1 = newRow.insertCell(0)
@@ -233,5 +228,4 @@ function display() {
         cell6.style.display = 'none'
     })
     totalHM()
-    // day()
 }
